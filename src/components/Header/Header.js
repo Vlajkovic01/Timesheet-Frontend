@@ -1,5 +1,5 @@
 import classes from "../../Style.module.css";
-import Navigation from "./Navigation";
+import Navigation from "./Navigation/Navigation";
 import User from "./User";
 import Logo from "./Logo";
 

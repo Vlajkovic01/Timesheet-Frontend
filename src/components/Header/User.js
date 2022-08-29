@@ -9,7 +9,7 @@ const User = () => {
                 <ul className={classes.user__dropdown}>
                     <li className={classes.user__list}><Link className={classes.user__link} to="/change-password">Change password</Link></li>
                     <li className={classes.user__list}><Link className={classes.user__link} to="/settings">Settings</Link></li>
-                    <li className={classes.user__list}><Link className={classes.user__link} to="export-data">Export all data</Link></li>
+                    <li className={classes.user__list}><Link className={classes.user__link} to="/export-data">Export all data</Link></li>
                 </ul>
             </div>
             <ul>
