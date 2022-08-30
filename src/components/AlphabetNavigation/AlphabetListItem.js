@@ -7,6 +7,12 @@ const AlphabetListItem = (props) => {
 
     const clickHandler = () => {
         setActive(prevState => !prevState);
+
+        if (!active) {
+            props.getLetter(props.text);
+        } else {
+            props.getLetter(null);
+        }
     };
 
     return (
