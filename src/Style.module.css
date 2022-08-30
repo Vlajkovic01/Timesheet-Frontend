@@ -352,6 +352,11 @@ nav ul, nav ol, ul, li {
     padding: 30px 15px;
 }
 
+.btn-modal {
+    border: none;
+    cursor: pointer;
+}
+
 .table-navigation {
     position: relative;
     margin-bottom: 15px;
@@ -935,6 +940,8 @@ nav ul, nav ol, ul, li {
     position: absolute;
     top: 10px;
     right: 10px;
+    border: none;
+    cursor: pointer;
 }
 
 .modal__icon {
@@ -1072,6 +1079,7 @@ nav ul, nav ol, ul, li {
     text-transform: uppercase;
     font-weight: 700;
     background-color: #e9e9ea;
+    cursor: pointer;
 }
 
 .alphabet__button--active {

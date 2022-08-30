@@ -1,11 +1,17 @@
 import classes from "../../Style.module.css";
-import {NavLink} from "react-router-dom";
+import {useState} from "react";
 
 const AlphabetListItem = (props) => {
+    const [active, setActive] = useState(false);
+
+
+    const clickHandler = () => {
+        setActive(prevState => !prevState);
+    };
 
     return (
         <li className={classes.alphabet__list}>
-            <NavLink className={(navData) => (navData.isActive ? `${classes['alphabet__button--active']}` : ``) + ` ${classes.alphabet__button}`} to={"/categories/" + props.text}>{props.text}</NavLink>
+            <button onClick={clickHandler} className={`${classes.alphabet__button} ${active ? `${classes['alphabet__button--active']}` : ''}`}>{props.text}</button>
         </li>
     );
 };
