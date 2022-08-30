@@ -1,11 +1,20 @@
 import CategoryListItem from "./CategoryListItem";
-
-const CATEGORIES = [{name: 'Test name 1'}, {name: 'Test name 2'}, {name: 'Test name 3'}]; //dummy data for testing
+import categoryService from "../../api/services/categoryService";
+import {useEffect, useState} from "react";
 
 const CategoryList = (props) => {
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setCategories(await categoryService.getCategories(props.searchQuery))
+        }
+        fetchData();
+    }, [props.searchQuery]);
+
     return (
         <div>
-            {CATEGORIES.map(category => <CategoryListItem key={category.name} name={category.name}/>)}
+            {categories.map(category => <CategoryListItem key={category.name} name={category.name}/>)}
         </div>
     );
 };
