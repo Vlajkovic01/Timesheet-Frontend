@@ -32,15 +32,22 @@ const Categories = () => {
         setSearchQuery(letter);
     };
 
-    const onCreateCategory = (category) => {
+    const onCreateHandler = (category) => {
         setNewCategory(category);
 
         setCategories(prevState => [...prevState, category]);
     };
 
+    const onDeleteHandler = async (id) => {
+        await categoryService.deleteCategory(id);
+
+        const filteredCategories = categories.filter(category => category.id !== id);
+        setCategories(filteredCategories);
+    };
+
     return (
         <Fragment>
-            <CreateCategoryModal onCreate={onCreateCategory} onClose={showModalHandler} modal={modal}/>
+            <CreateCategoryModal onCreate={onCreateHandler} onClose={showModalHandler} modal={modal}/>
             <div className={classes.wrapper}>
                 <section className={classes['content']}>
                     <div className={classes['main-content']}>
@@ -55,7 +62,7 @@ const Categories = () => {
                             </form>
                         </div>
                         <Alphabet getLetter={getAlphabetLetter}/>
-                        <CategoryList categories={categories} newCategory={newCategory} searchQuery={searchQuery}/>
+                        <CategoryList categories={categories} newCategory={newCategory} searchQuery={searchQuery} onDelete={onDeleteHandler}/>
                     </div>
                     <div className={classes.pagination}>
                         {/*TODO implement pagination component after fetching a data*/}

@@ -12,16 +12,23 @@ const getCategories = async (searchQuery) => {
 
 const create = async (name) => {
     let response;
-    if (name !== null || name !== "") {
+    if (name !== null && name !== "") {
         response = await api.post("/category", {name: name});
     }
 
     return response.data;
 }
 
+const deleteCategory = async (id) => {
+    if (id !== null && id !== "") {
+        await api.delete(`/category/${id}`);
+    }
+};
+
 const categoryService = {
     getCategories,
-    create
+    create,
+    deleteCategory
 }
 
 export default categoryService;
