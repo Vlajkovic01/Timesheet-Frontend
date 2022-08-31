@@ -7,12 +7,21 @@ const getCategories = async (searchQuery) => {
     } else {
         response = await api.get('/category');
     }
-
-    return response.data;
+    return response.data
 };
 
+const create = async (name) => {
+    let response;
+    if (name !== null || name !== "") {
+        response = await api.post("/category", {name: name});
+    }
+
+    return response.data;
+}
+
 const categoryService = {
-    getCategories
+    getCategories,
+    create
 }
 
 export default categoryService;
