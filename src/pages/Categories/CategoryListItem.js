@@ -8,6 +8,10 @@ const CategoryListItem = (props) => {
         setToggle(prevState => !prevState);
     };
 
+    const onDeleteHandler = () => {
+        props.onDelete(props.id)
+    };
+
     return (
         <div className={classes.accordion}>
             <div className={classes.accordion__intro} onClick={showCategoryHandler}>
@@ -26,7 +30,7 @@ const CategoryListItem = (props) => {
                 </div>
                 <div className={classes['btn-wrap']}>
                     <button type="submit" className={`${classes.btn} ${classes['btn--green']}`}><span>Save changes</span></button>
-                    <button type="button" className={`${classes.btn} ${classes['btn--red']}`}><span>Delete</span></button>
+                    <button type="button" className={`${classes.btn} ${classes['btn--red']}`} onClick={onDeleteHandler}><span>Delete</span></button>
                 </div>
             </form>
         </div>
