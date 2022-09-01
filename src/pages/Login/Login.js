@@ -1,24 +1,30 @@
 import classes from "../../Style.module.css";
 import {Link, useNavigate} from "react-router-dom";
-import {useRef, useState} from "react";
-import authService from "../../api/services/authService";
+import {useEffect, useRef} from "react";
+import {useSelector, useDispatch} from "react-redux";
+import {login, reset} from "../../redux/auth/authSlice";
 
 const Login = () => {
     const email = useRef();
     const password = useRef();
 
-    const [login, setLogin] = useState(true);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const {isError, isLoggedIn} = useSelector((state) => state.auth);
 
     const submitHandler = async (event) => {
         event.preventDefault();
 
-        await authService.login(email.current.value, password.current.value).then(response => {
-            navigate('/index')
-        }).catch(err => {
-            setLogin(false);
-        });
+        dispatch(login({email: email.current.value, password: password.current.value}));
     }
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate('/timesheet')
+        }
+        dispatch(reset());
+    }, [isLoggedIn, navigate, dispatch]);
 
     return (
         <div className={classes['initial-form']}>
@@ -37,13 +43,15 @@ const Login = () => {
                             </li>
                         </ul>
                         <div>
-                            {!login && <p>Email or password is incorrect</p>}
+                            {isError && <p>Email or password is incorrect</p>}
                         </div>
                         <div className={classes['btn-wrap']}>
-                            <label className={classes['initial-form__checkbox']}><input type="checkbox" name="remember-me"/>Remember me</label>
+                            <label className={classes['initial-form__checkbox']}><input type="checkbox"
+                                                                                        name="remember-me"/>Remember me</label>
                             <Link to="/forgot-password"
-                               className={`${classes.btn} ${classes['btn--transparent']}`}><span>Forgot password</span></Link>
-                            <button type="submit" className={`${classes.btn} ${classes['btn--green']}`}><span>Login</span></button>
+                                  className={`${classes.btn} ${classes['btn--transparent']}`}><span>Forgot password</span></Link>
+                            <button type="submit" className={`${classes.btn} ${classes['btn--green']}`}>
+                                <span>Login</span></button>
                         </div>
                     </form>
                 </div>

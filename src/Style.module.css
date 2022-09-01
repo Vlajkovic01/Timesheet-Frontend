@@ -190,9 +190,12 @@
 }
 
 .logout__link {
-    color: #fff;
+    background-color: #f1592a;
     font-size: 14px;
     text-decoration: none;
+    color: #fff;
+    border: none;
+    cursor: pointer;
 }
 
 .logout__link:hover {

@@ -11,7 +11,7 @@ function App() {
             <Header/>
             <Routes>
                 <Route path={'categories'} element={<Categories/>}/>
-                <Route path="/login" element={<Login/>}/>
+                <Route path={'login'} element={<Login/>}/>
             </Routes>
             <Footer/>
         </Fragment>
