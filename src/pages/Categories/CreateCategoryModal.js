@@ -1,16 +1,17 @@
 import classes from "../../Style.module.css";
-import categoryService from "../../api/services/categoryService";
 import {useState} from "react";
-
+import {useDispatch} from "react-redux";
+import {addCategory} from "../../redux/category/categorySlice";
 
 const CreateCategoryModal = (props) => {
+
+    const dispatch = useDispatch();
     const [name, setName] = useState("");
 
     const submitHandler = (event) => {
         event.preventDefault();
 
-        categoryService.create(name);
-        props.onCreate({name: name});
+        dispatch(addCategory(name))
 
         setName("");
         props.onClose();
@@ -39,7 +40,7 @@ const CreateCategoryModal = (props) => {
                     <div className={classes['btn-wrap']}>
                         <button type="submit" className={`${classes.btn} ${classes['btn--green']}`}>
                             <span>Save changes</span></button>
-                        <button type="button" className={`${classes.btn} ${classes['btn--red']}`}><span>Delete</span>
+                        <button type="button" className={`${classes.btn} ${classes['btn--red']}`} onClick={props.onClose}><span>Delete</span>
                         </button>
                     </div>
                 </form>

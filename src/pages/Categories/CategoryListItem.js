@@ -1,18 +1,23 @@
 import classes from "../../Style.module.css";
 import {useRef, useState} from "react";
 import categoryService from "../../api/services/categoryService";
+import {useDispatch} from "react-redux";
+import {removeCategory} from "../../redux/category/categorySlice";
 
 const CategoryListItem = (props) => {
+
+    const dispatch = useDispatch();
+
     const [toggle, setToggle] = useState(false);
     const [name, setName] =useState(props.name);
     const inputNameRef = useRef();
 
-    const showCategoryHandler = (event) => {
+    const showCategoryHandler = () => {
         setToggle(prevState => !prevState);
     };
 
     const onDeleteHandler = () => {
-        props.onDelete(props.id)
+        dispatch(removeCategory(props.id));
     };
 
     const onUpdateHandler = async (event) => {
