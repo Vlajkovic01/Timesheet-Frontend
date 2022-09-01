@@ -27,7 +27,7 @@ const deleteCategory = async (id) => {
 
 const update = async (id, name) => {
     if (id !== null && name !== null) {
-        return await api.put('/category', {id:id, name:name})
+        return api.put('/category', {id:id, name:name})
     }
 }
 
