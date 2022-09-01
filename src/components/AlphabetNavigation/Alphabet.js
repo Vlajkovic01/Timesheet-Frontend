@@ -1,10 +1,10 @@
 import classes from "../../Style.module.css";
 import AlphabetList from "./AlphabetList";
 
-const Alphabet = (props) => {
+const Alphabet = () => {
     return (
         <div className={classes.alphabet}>
-            <AlphabetList getLetter={props.getLetter}/>
+            <AlphabetList/>
         </div>
     );
 };
