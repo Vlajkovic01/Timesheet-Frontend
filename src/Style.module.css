@@ -1046,6 +1046,8 @@ nav ul, nav ol, ul, li {
 .pagination__button {
     color: #000;
     text-decoration: none;
+    border: none;
+    background-color: #fff;
 }
 
 .pagination__button:hover {
