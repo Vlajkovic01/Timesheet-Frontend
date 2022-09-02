@@ -2,7 +2,9 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import categoryService from "../../api/services/categoryService";
 
 const initialState = {
-    categories: []
+    categories: [],
+    totalElements: 0,
+    numberOfPages: 0
 };
 
 export const getCategories = createAsyncThunk('categories', async (searchQuery, thunkAPI) => {
@@ -29,6 +31,7 @@ export const categorySlice = createSlice({
     reducers: {
         removeCategory: (state, action) => {
             state.categories = state.categories.filter(category => category.id !== action.payload);
+            state.numberOfElements -= 1;
 
             const remove = async () => {
                 await categoryService.deleteCategory(action.payload);
@@ -39,10 +42,13 @@ export const categorySlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getCategories.fulfilled, (state, action) => {
-                state.categories = action.payload;
+                state.categories = action.payload['content'];
+                state.totalElements = action.payload['totalElements'];
+                state.numberOfPages = Math.ceil(action.payload['totalElements'] / action.payload['size']);
             })
             .addCase(addCategory.fulfilled, (state, action) => {
                 state.categories = [...state.categories, action.payload]
+                state.numberOfElements += 1;
             })
     }
 });
