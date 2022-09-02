@@ -24,7 +24,7 @@ const CreateCategoryModal = (props) => {
     }
 
     return (
-        <div className={`${classes.modal} ${props.modal ? `${classes['modal--show']}` : ''}`}>
+        <div className={`${classes.modal} ${props.modal ? classes['modal--show'] : ''}`}>
             <div className={classes.modal__content}>
                 <h2>Create new category</h2>
                 <button className={classes.modal__close} onClick={props.onClose}>
